@@ -10,6 +10,7 @@ Consultar o stock de um material específico.
 Atualizar a quantidade em stock (adição ou remoção).
 Exibir o estado geral do stock.
 <h3> EXPLICAÇÃO DO FUNCIONAMENTO </h3>
+
 adicionar_material(stock)
 
 Esta função permite adicionar novos materiais ao stock.
