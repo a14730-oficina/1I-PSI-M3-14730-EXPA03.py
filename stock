@@ -1,4 +1,6 @@
-#[ Função para adicionar materiais ao stock ]
+import csv
+
+# Função para adicionar materiais ao stock
 def adicionar_material(stock):
     nome = input("Nome do material: ")
     if nome in stock:
@@ -8,8 +10,7 @@ def adicionar_material(stock):
         stock[nome] = quantidade
         print(f"{nome} adicionado com sucesso!")
 
-
-#[ Função para consultar o stock de um material ]
+# Função para consultar o stock de um material
 def consultar_stock(stock):
     nome = input("Nome do material para consulta: ")
     if nome in stock:
@@ -17,8 +18,7 @@ def consultar_stock(stock):
     else:
         print(f"{nome} não encontrado no stock.")
 
-
-#[ Função para atualizar o stock ]
+# Função para atualizar o stock
 def atualizar_stock(stock):
     nome = input("Nome do material a atualizar: ")
     if nome in stock:
@@ -38,16 +38,24 @@ def atualizar_stock(stock):
     else:
         print(f"{nome} não encontrado no stock.")
 
-#[ Função para exibir o estado geral do stock ]
+# Função para exibir o estado geral do stock
 def exibir_stock(stock):
     print("\nEstado Geral do Stock:")
     print("Material\tQuantidade")
     print("-" * 30)
     for material, quantidade in stock.items():
-        print(f"{material}\t\t{quantidade}")
+                print(f"{material}\t\t{quantidade}")
 
+# Função para exportar stock para um ficheiro CSV
+def exportar_stock(stock, arquivo):
+    with open(arquivo, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Material", "Quantidade"])  # Escrever o cabeçalho
+        for material, quantidade in stock.items():
+            writer.writerow([material, quantidade])  # Escrever os dados do stock
+    print(f"Stock exportado para {arquivo}")
 
-#[ Função principal para gerir o menu ]
+# Função principal para gerir o menu
 def main():
     stock = {}
     while True:
@@ -56,7 +64,8 @@ def main():
         print("2. Consultar Stock")
         print("3. Atualizar Stock")
         print("4. Exibir Stock Geral")
-        print("5. Sair")
+        print("5. Exportar Stock")
+        print("6. Sair")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
@@ -68,6 +77,8 @@ def main():
         elif opcao == "4":
             exibir_stock(stock)
         elif opcao == "5":
+            exportar_stock(stock, "stock.csv")
+        elif opcao == "6":
             print("Encerrando o programa...")
             break
         else:
@@ -75,4 +86,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
